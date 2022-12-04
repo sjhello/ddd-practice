@@ -4,7 +4,12 @@ public class Order {
 
 	private OrderState orderState;
 	private ShippingInfo shippingInfo;
-	
+
+	public void cancel() {
+		isNotYetShipped();
+		this.orderState = OrderState.CANCEL;
+	}
+
 	public void changeShippingInfo(ShippingInfo shippingInfo) {
 		isNotYetShipped();
 		this.shippingInfo = shippingInfo;

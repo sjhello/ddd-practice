@@ -1,9 +1,24 @@
 package com.sjhello.study.order.domain;
 
+import java.util.List;
+
 public class Order {
-	
+
+	private OrderNo orderNo;
 	private OrderState orderState;
 	private ShippingInfo shippingInfo;
+	private List<OrderInfo> orderInfos;
+	private Money totalAmounts;
+
+	public Order(OrderNo orderNo, OrderState orderState, ShippingInfo shippingInfo, List<OrderInfo> orderInfos,
+		Money totalAmounts) {
+		this.orderNo = orderNo;
+		this.orderState = orderState;
+		this.shippingInfo = shippingInfo;
+		setOrderInos(orderInfos);
+		calculateAllAmounts();
+	}
+
 
 	public void cancel() {
 		verifyNotYetShipped();
@@ -41,6 +56,17 @@ public class Order {
 		if (this.orderState == OrderState.PAYMENT_WAITING) {
 			throw new IllegalArgumentException("아직 결제 되지 않았습니다");
 		}
+	}
+
+	private void setOrderInos(List<OrderInfo> orderInfos) {
+		if (orderInfos == null || orderInfos.isEmpty()) {
+			throw new IllegalArgumentException("주문 정보가 비어있습니다");
+		}
+		this.orderInfos = orderInfos;
+	}
+
+	private void calculateAllAmounts() {
+		this.totalAmounts = new Money(orderInfos.stream().mapToInt(x -> x.getAmount().getValue()).sum());
 	}
 
 }

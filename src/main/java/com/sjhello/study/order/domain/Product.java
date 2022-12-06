@@ -1,4 +1,4 @@
-package com.sjhello.study.domain;
+package com.sjhello.study.order.domain;
 
 public class Product {
 

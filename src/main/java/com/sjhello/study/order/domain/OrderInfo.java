@@ -1,5 +1,7 @@
 package com.sjhello.study.order.domain;
 
+import com.sjhello.study.common.Money;
+
 public class OrderInfo {
 
 	private Product product;

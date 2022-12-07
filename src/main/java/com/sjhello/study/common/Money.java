@@ -1,4 +1,4 @@
-package com.sjhello.study.order.domain;
+package com.sjhello.study.common;
 
 public class Money {
 

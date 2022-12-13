@@ -2,14 +2,14 @@ package com.sjhello.study.order.domain;
 
 import com.sjhello.study.common.Money;
 
-public class OrderInfo {
+public class OrderLine {
 
 	private Product product;
 	private Money price;
 	private int quantity;
 	private Money amount;
 
-	public OrderInfo(Product product, Money price, int quantity) {
+	public OrderLine(Product product, Money price, int quantity) {
 		this.product = product;
 		this.price = price;
 		this.quantity = quantity;

@@ -2,20 +2,22 @@ package com.sjhello.study.order.domain;
 
 import java.util.List;
 
+import com.sjhello.study.common.Money;
+
 public class Order {
 
 	private OrderNo orderNo;
 	private OrderState orderState;
 	private ShippingInfo shippingInfo;
-	private List<OrderInfo> orderInfos;
+	private List<OrderLine> orderLines;
 	private Money totalAmounts;
 
-	public Order(OrderNo orderNo, OrderState orderState, ShippingInfo shippingInfo, List<OrderInfo> orderInfos,
+	public Order(OrderNo orderNo, OrderState orderState, ShippingInfo shippingInfo, List<OrderLine> orderLines,
 		Money totalAmounts) {
 		this.orderNo = orderNo;
 		this.orderState = orderState;
 		this.shippingInfo = shippingInfo;
-		setOrderInos(orderInfos);
+		setOrderLines(orderLines);
 		calculateAllAmounts();
 	}
 
@@ -58,15 +60,15 @@ public class Order {
 		}
 	}
 
-	private void setOrderInos(List<OrderInfo> orderInfos) {
-		if (orderInfos == null || orderInfos.isEmpty()) {
+	private void setOrderLines(List<OrderLine> orderLines) {
+		if (orderLines == null || orderLines.isEmpty()) {
 			throw new IllegalArgumentException("주문 정보가 비어있습니다");
 		}
-		this.orderInfos = orderInfos;
+		this.orderLines = orderLines;
 	}
 
 	private void calculateAllAmounts() {
-		this.totalAmounts = new Money(orderInfos.stream().mapToInt(x -> x.getAmount().getValue()).sum());
+		this.totalAmounts = new Money(orderLines.stream().mapToInt(x -> x.getAmount().getValue()).sum());
 	}
 
 }
